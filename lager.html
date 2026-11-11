@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lager – Vaktmester Larsen</title>
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Intern lageroversikt. Data lagres bare i denne nettleseren.">
+  <link rel="icon" href="img/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#innhold">Hopp til innhold</a>
+  <div class="demo-banner" role="note"><strong>Demo / førehandsvisning – ikkje offisiell side</strong></div>
+  <div class="tool-banner">
+    <div class="wrap">
+      <strong>Privat lageroversikt.</strong>
+      Varelageret lagres bare i denne nettleseren. Det sendes ikke til nettet. Ta eksportkopi hvis du bytter apparat.
+    </div>
+  </div>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <img src="img/mark.svg" width="64" height="64" alt="">
+        <span class="brand-name">
+          <strong>Vaktmester Larsen</strong>
+          <span>Lager</span>
+        </span>
+      </a>
+      <nav class="nav intern-nav" aria-label="Intern meny">
+        <a class="btn btn-ghost btn-small" href="oppdrag.html">Oppdrag</a>
+        <a class="btn btn-ghost btn-small" href="oppdrag.html#innboks">Innboks</a>
+        <a class="btn btn-spruce btn-small" href="lager.html">Lager</a>
+        <a class="btn btn-ghost btn-small" href="index.html">Forside</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="innhold" class="wrap" style="padding: 1.6rem 0 3rem;">
+    <div class="section-head">
+      <h1 style="font-family:var(--serif);font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:550;letter-spacing:-0.03em;margin:0 0 0.4rem;">Materialer på lager</h1>
+      <p>Hold oversikt over strøsand, salt, festemateriell og annet forbruk. Varer på eller under minstenivå merkes i rødt.</p>
+    </div>
+
+    <div id="lager-varsel" class="stock-alert hidden" role="status"></div>
+
+    <form class="form-card" id="lager-skjema">
+      <h2 style="font-family:var(--serif);font-size:1.35rem;margin:0 0 0.4rem;">Ny vare</h2>
+      <input type="hidden" id="vare-id" value="">
+      <div class="form-grid">
+        <div>
+          <label for="vare-navn">Vare</label>
+          <input id="vare-navn" type="text" required>
+        </div>
+        <div>
+          <label for="vare-kategori">Kategori</label>
+          <select id="vare-kategori">
+            <option>Strøsand</option>
+            <option>Salt</option>
+            <option>Skruer og festemateriell</option>
+            <option>Maling</option>
+            <option>Verktøy</option>
+            <option>Drivstoff</option>
+            <option>Annet</option>
+          </select>
+        </div>
+        <div>
+          <label for="vare-antall">Antall</label>
+          <input id="vare-antall" type="number" inputmode="decimal" step="0.01" value="0" required>
+        </div>
+        <div>
+          <label for="vare-enhet">Enhet</label>
+          <input id="vare-enhet" type="text" placeholder="kg, l, stk, sekk" required>
+        </div>
+        <div>
+          <label for="vare-min">Minste nivå</label>
+          <input id="vare-min" type="number" inputmode="decimal" step="0.01" value="0">
+        </div>
+        <div>
+          <label for="vare-sted">Plassering</label>
+          <input id="vare-sted" type="text" placeholder="Uthus, bil, hybel">
+        </div>
+        <div>
+          <label for="vare-leverandor">Leverandør</label>
+          <input id="vare-leverandor" type="text">
+        </div>
+        <div>
+          <label for="vare-pris">Pris (kr, valgfritt)</label>
+          <input id="vare-pris" type="text" inputmode="decimal">
+        </div>
+      </div>
+      <div class="btn-row form-actions">
+        <button type="submit" class="btn btn-spruce" id="vare-lagre">Lagre vare</button>
+        <button type="button" class="btn btn-ghost hidden" id="vare-avbryt">Avbryt redigering</button>
+      </div>
+    </form>
+
+    <div class="filters" id="lager-filter" role="group" aria-label="Filtrer på kategori" style="margin-top:1.4rem">
+      <button type="button" class="chip" data-kat="alle" aria-pressed="true">Alle</button>
+      <button type="button" class="chip" data-kat="lavt" aria-pressed="false">Lavt lager</button>
+      <button type="button" class="chip" data-kat="Strøsand" aria-pressed="false">Strøsand</button>
+      <button type="button" class="chip" data-kat="Salt" aria-pressed="false">Salt</button>
+      <button type="button" class="chip" data-kat="Skruer og festemateriell" aria-pressed="false">Skruer</button>
+      <button type="button" class="chip" data-kat="Maling" aria-pressed="false">Maling</button>
+      <button type="button" class="chip" data-kat="Drivstoff" aria-pressed="false">Drivstoff</button>
+      <button type="button" class="chip" data-kat="Annet" aria-pressed="false">Annet</button>
+    </div>
+
+    <div class="price-wrap" style="margin-top:0.8rem">
+      <table class="price-table stock-table" id="lager-tabell">
+        <thead>
+          <tr>
+            <th>Vare</th>
+            <th>Kategori</th>
+            <th>Antall</th>
+            <th>Min.</th>
+            <th>Plassering</th>
+            <th>Leverandør</th>
+            <th>Pris</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p id="lager-tom" class="empty hidden" style="margin-top:1rem">Ingen varer i denne visningen ennå.</p>
+
+    <div class="toolbar">
+      <button type="button" class="btn btn-ghost btn-small" id="lager-json">Eksporter JSON</button>
+      <button type="button" class="btn btn-ghost btn-small" id="lager-csv">Eksporter CSV</button>
+      <label class="btn btn-ghost btn-small" for="lager-import" style="cursor:pointer;margin:0">Importer fil</label>
+      <input id="lager-import" type="file" accept=".json,.csv,application/json,text/csv" hidden>
+    </div>
+    <p class="note">Eksporten laster ned en fil til enheten. Ved import blir eksisterende lager erstattet etter bekreftelse.</p>
+    <p class="form-status" id="lager-status" role="status"></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Intern side for Lasse Larsen. Ikke knyttet fra den offentlige menyen. Data blir liggende lokalt i nettleseren.</p>
+    </div>
+  </footer>
+  <script src="js/config.js"></script>
+  <script src="js/shared.js"></script>
+  <script src="js/lager.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 520" role="img" aria-labelledby="heroTitle heroDesc">
+  <title id="heroTitle">Hus i vinterlandskap</title>
+  <desc id="heroDesc">Stiliserte grantrær og et hus med snø på taket, i Hof-landskap.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#dce7e4"/>
+      <stop offset="55%" stop-color="#eef2ec"/>
+      <stop offset="100%" stop-color="#c9d4c8"/>
+    </linearGradient>
+    <linearGradient id="hill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a5c4c"/>
+      <stop offset="100%" stop-color="#1e3d32"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="520" fill="url(#sky)"/>
+  <circle cx="500" cy="110" r="46" fill="#f7f4ea" opacity="0.9"/>
+  <circle cx="120" cy="70" r="3" fill="#fff"/>
+  <circle cx="200" cy="120" r="2.2" fill="#fff"/>
+  <circle cx="310" cy="60" r="2.4" fill="#fff"/>
+  <circle cx="430" cy="150" r="2" fill="#fff"/>
+  <circle cx="560" cy="200" r="2.6" fill="#fff"/>
+  <circle cx="80" cy="180" r="2" fill="#fff"/>
+  <circle cx="260" cy="200" r="1.8" fill="#fff"/>
+  <path d="M0 340 C 80 300, 160 310, 250 335 C 360 368, 470 300, 640 328 L640 520 L0 520 Z" fill="url(#hill)"/>
+  <path d="M0 390 C 140 360, 280 410, 420 375 C 520 350, 590 368, 640 360 L640 520 L0 520 Z" fill="#16352b"/>
+  <g fill="#244a3c">
+    <polygon points="70,360 100,250 130,360"/>
+    <polygon points="78,310 100,228 122,310"/>
+    <rect x="96" y="360" width="8" height="28"/>
+  </g>
+  <g fill="#1b3a2f">
+    <polygon points="150,370 178,280 206,370"/>
+    <polygon points="158,330 178,258 198,330"/>
+    <rect x="174" y="370" width="8" height="22"/>
+  </g>
+  <g transform="translate(430,250)">
+    <polygon points="40,0 150,0 190,55 -5,55" fill="#f4f1ea"/>
+    <polygon points="40,0 150,0 190,55 -5,55" fill="none" stroke="#1e3d32" stroke-width="3" stroke-linejoin="round"/>
+    <rect x="18" y="55" width="154" height="110" fill="#e7e0d2" stroke="#1e3d32" stroke-width="3"/>
+    <rect x="40" y="78" width="36" height="32" fill="#dce8e4" stroke="#1e3d32" stroke-width="2.2"/>
+    <rect x="58" y="78" width="1.8" height="32" fill="#1e3d32"/>
+    <rect x="40" y="93" width="36" height="1.8" fill="#1e3d32"/>
+    <rect x="112" y="98" width="32" height="66" fill="#c46a2b" stroke="#1e3d32" stroke-width="2.2"/>
+    <circle cx="136" cy="132" r="2.4" fill="#1e3d32"/>
+    <path d="M10 55 h172" stroke="#1e3d32" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <path d="M400 405 C 460 392, 530 398, 600 386 L 600 420 C 530 430, 460 424, 400 430 Z" fill="#f4f1ea" opacity=".85"/>
+  <g transform="translate(360,355)">
+    <line x1="18" y1="8" x2="64" y2="70" stroke="#c4a574" stroke-width="5" stroke-linecap="round"/>
+    <ellipse cx="74" cy="82" rx="16" ry="7" fill="none" stroke="#d7c4a0" stroke-width="5"/>
+  </g>
+  <g fill="#1b3a2f">
+    <polygon points="560,400 590,310 620,400"/>
+    <polygon points="568,365 590,292 612,365"/>
+    <rect x="586" y="400" width="8" height="30"/>
+  </g>
+</svg>

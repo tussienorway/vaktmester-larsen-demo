@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Oppdragsoversikt – Vaktmester Larsen</title>
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Intern oversikt over oppdrag. Data lagres bare i denne nettleseren.">
+  <link rel="icon" href="img/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#innhold">Hopp til innhold</a>
+  <div class="demo-banner" role="note"><strong>Demo / førehandsvisning – ikkje offisiell side</strong></div>
+  <div class="tool-banner">
+    <div class="wrap">
+      <strong>Privat oversikt.</strong>
+      Oppdrag og kundelister lagres bare i denne nettleseren på denne telefonen eller PC-en. De sendes ikke til nettet. Ta eksportkopi hvis du bytter apparat.
+    </div>
+  </div>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <img src="img/mark.svg" width="64" height="64" alt="">
+        <span class="brand-name">
+          <strong>Vaktmester Larsen</strong>
+          <span>Oppdragsoversikt</span>
+        </span>
+      </a>
+      <nav class="nav intern-nav" aria-label="Intern meny">
+        <a class="btn btn-spruce btn-small" href="oppdrag.html">Oppdrag</a>
+        <a class="btn btn-ghost btn-small" href="oppdrag.html#innboks">Innboks <span class="badge hidden" id="innboks-merke"></span></a>
+        <a class="btn btn-ghost btn-small" href="lager.html">Lager</a>
+        <a class="btn btn-ghost btn-small" href="index.html">Forside</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="innhold" class="wrap" style="padding: 1.6rem 0 3rem;">
+    <div class="section-head">
+      <h1 style="font-family:var(--serif);font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:550;letter-spacing:-0.03em;margin:0 0 0.4rem;">Arbeidsoversikt</h1>
+      <p>Legg inn jobber, følg opp anbud i innboksen, og trekk materialer fra lageret. Alt blir liggende på enheten din.</p>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Oversikter">
+      <button class="tab" role="tab" id="tab-oppdrag" aria-selected="true" aria-controls="panel-oppdrag">Oppdrag</button>
+      <button class="tab" role="tab" id="tab-innboks" aria-selected="false" aria-controls="panel-innboks">Innboks <span class="badge hidden" id="innboks-tab-merke"></span></button>
+      <button class="tab" role="tab" id="tab-fast" aria-selected="false" aria-controls="panel-fast">Faste snøkunder</button>
+    </div>
+
+    <section id="panel-oppdrag" role="tabpanel" aria-labelledby="tab-oppdrag">
+      <form class="form-card" id="jobb-skjema">
+        <h2 style="font-family:var(--serif);font-size:1.35rem;margin:0 0 0.4rem;">Nytt oppdrag</h2>
+        <input type="hidden" id="jobb-id" value="">
+        <div class="form-grid">
+          <div>
+            <label for="kunde">Kunde</label>
+            <input id="kunde" name="kunde" type="text" required>
+          </div>
+          <div>
+            <label for="jobb-telefon">Telefon</label>
+            <input id="jobb-telefon" name="telefon" type="tel">
+          </div>
+          <div class="full">
+            <label for="jobb-adresse">Adresse</label>
+            <input id="jobb-adresse" name="adresse" type="text">
+          </div>
+          <div>
+            <label for="jobb-type">Type</label>
+            <select id="jobb-type" name="type">
+              <option>Snømåking</option>
+              <option>Praktisk oppdrag</option>
+              <option>Annet</option>
+            </select>
+          </div>
+          <div>
+            <label for="jobb-dato">Dato</label>
+            <input id="jobb-dato" name="dato" type="date">
+          </div>
+          <div>
+            <label for="jobb-status">Status</label>
+            <select id="jobb-status" name="status">
+              <option value="ny">Ny</option>
+              <option value="planlagt">Planlagt</option>
+              <option value="ferdig">Ferdig</option>
+              <option value="fakturert">Fakturert</option>
+            </select>
+          </div>
+          <div>
+            <label for="jobb-pris">Pris (kr, valgfritt)</label>
+            <input id="jobb-pris" name="pris" type="text" inputmode="decimal" placeholder="[pris etter avtale]">
+          </div>
+          <div class="full">
+            <label for="jobb-notat">Notat</label>
+            <textarea id="jobb-notat" name="notat" style="min-height:4.5rem"></textarea>
+          </div>
+        </div>
+        <div class="btn-row form-actions">
+          <button type="submit" class="btn btn-spruce" id="jobb-lagre">Lagre oppdrag</button>
+          <button type="button" class="btn btn-ghost hidden" id="jobb-avbryt">Avbryt redigering</button>
+        </div>
+      </form>
+
+      <div class="filters" id="status-filter" role="group" aria-label="Filtrer på status" style="margin-top:1.4rem">
+        <button type="button" class="chip" data-filter="alle" aria-pressed="true">Alle <span id="antall-alle"></span></button>
+        <button type="button" class="chip" data-filter="ny" aria-pressed="false">Ny <span id="antall-ny"></span></button>
+        <button type="button" class="chip" data-filter="planlagt" aria-pressed="false">Planlagt <span id="antall-planlagt"></span></button>
+        <button type="button" class="chip" data-filter="ferdig" aria-pressed="false">Ferdig <span id="antall-ferdig"></span></button>
+        <button type="button" class="chip" data-filter="fakturert" aria-pressed="false">Fakturert <span id="antall-fakturert"></span></button>
+      </div>
+      <div id="jobb-liste" class="job-list"></div>
+    </section>
+
+    
+    <section id="panel-innboks" role="tabpanel" aria-labelledby="tab-innboks" class="hidden">
+      <p class="note" style="margin-top:0">Forespørsler som er lagret fra skjemaet eller sekretæren på forsiden, vises her. De ligger bare i denne nettleseren inntil en server er koblet på.</p>
+      <div class="filters" id="innboks-filter" role="group" aria-label="Filtrer forespørsler" style="margin-top:0.8rem">
+        <button type="button" class="chip" data-rfilter="ny" aria-pressed="true">Nye</button>
+        <button type="button" class="chip" data-rfilter="alle" aria-pressed="false">Alle</button>
+        <button type="button" class="chip" data-rfilter="jobb" aria-pressed="false">Gjort om til jobb</button>
+      </div>
+      <div id="innboks-liste" class="job-list" style="margin-top:0.8rem"></div>
+    </section>
+    <section id="panel-fast" role="tabpanel" aria-labelledby="tab-fast" class="hidden">
+      <form class="form-card" id="kunde-skjema">
+        <h2 style="font-family:var(--serif);font-size:1.35rem;margin:0 0 0.4rem;">Fast snømåkingskunde</h2>
+        <input type="hidden" id="kunde-id" value="">
+        <div class="form-grid">
+          <div>
+            <label for="fast-navn">Navn</label>
+            <input id="fast-navn" type="text" required>
+          </div>
+          <div>
+            <label for="fast-telefon">Telefon</label>
+            <input id="fast-telefon" type="tel">
+          </div>
+          <div class="full">
+            <label for="fast-adresse">Adresse</label>
+            <input id="fast-adresse" type="text">
+          </div>
+          <div class="full">
+            <label for="fast-notat">Avtale / notat</label>
+            <textarea id="fast-notat" style="min-height:4.5rem" placeholder="For eksempel: innkjørsel og trappeoppgang, etter snøfall"></textarea>
+          </div>
+        </div>
+        <div class="btn-row form-actions">
+          <button type="submit" class="btn btn-spruce" id="kunde-lagre">Lagre kunde</button>
+          <button type="button" class="btn btn-ghost hidden" id="kunde-avbryt">Avbryt redigering</button>
+        </div>
+      </form>
+      <div id="kunde-liste" class="customer-list" style="margin-top:1.4rem"></div>
+    </section>
+
+    <div class="toolbar">
+      <button type="button" class="btn btn-ghost btn-small" id="eksport-json">Eksporter JSON</button>
+      <button type="button" class="btn btn-ghost btn-small" id="eksport-csv">Eksporter CSV</button>
+      <label class="btn btn-ghost btn-small" for="import-fil" style="cursor:pointer;margin:0">Importer fil</label>
+      <input id="import-fil" type="file" accept=".json,.csv,application/json,text/csv" hidden>
+    </div>
+    <p class="note">Eksporten laster ned en fil til enheten. Ved import blir eksisterende data erstattet etter bekreftelse.</p>
+    <p class="form-status" id="verktoy-status" role="status"></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Intern side for Lasse Larsen. Ikke knyttet fra den offentlige menyen. Data blir liggende lokalt i nettleseren.</p>
+    </div>
+  </footer>
+  <script src="js/config.js"></script>
+  <script src="js/shared.js"></script>
+  <script src="js/oppdrag.js"></script>
+</body>
+</html>
